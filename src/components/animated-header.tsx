@@ -1,25 +1,42 @@
 import { useGSAP } from '@gsap/react'
+import { cva, type VariantProps } from 'class-variance-authority'
 import gsap from 'gsap'
 import { useRef } from 'react'
+import { cn } from '@/lib/utils'
 import AnimatedTextLines from './animated-text-lines'
 
-interface AnimatedHeaderProps {
+const headerVariants = cva('', {
+  variants: {
+    color: {
+      default: 'text-foreground',
+      invert: 'text-background',
+    },
+  },
+  defaultVariants: {
+    color: 'default',
+  },
+})
+
+export interface AnimatedHeaderProps
+  extends VariantProps<typeof headerVariants> {
   subTitle: string
   title: string
   brief: string
-  textColor: string // TODO: can we type css class
   withScrollTrigger?: boolean
+  className?: string
 }
 
 export default function AnimatedHeader({
   subTitle,
   title,
   brief,
-  textColor,
+  color,
   withScrollTrigger = false,
+  className,
 }: AnimatedHeaderProps) {
   const contextRef = useRef(null)
   const headerRef = useRef(null)
+
   const shouldSplitTitle = title.includes(' ')
   const titleParts = shouldSplitTitle ? title.split(' ') : [title]
 
@@ -29,11 +46,13 @@ export default function AnimatedHeader({
         ? { trigger: contextRef.current }
         : undefined,
     })
+
     tl.from(contextRef.current, {
       y: '50vh',
       duration: 1,
       ease: 'circ.out',
     })
+
     tl.from(
       headerRef.current,
       {
@@ -55,13 +74,21 @@ export default function AnimatedHeader({
           className="flex flex-col justify-center gap-12 pt-16 sm:gap-16"
         >
           <p
-            className={`px-10 font-light text-sm uppercase tracking-[0.5rem] ${textColor}`}
+            className={cn(
+              'px-10 font-light text-sm uppercase tracking-[0.5rem]',
+              headerVariants({ color }),
+              className,
+            )}
           >
             {subTitle}
           </p>
           <div className="px-10">
             <h1
-              className={`banner-text-responsive flex flex-col gap-12 uppercase sm:gap-16 md:block ${textColor}`}
+              className={cn(
+                'banner-text-responsive flex flex-col gap-12 uppercase sm:gap-16 md:block',
+                headerVariants({ color }),
+                className,
+              )}
             >
               {titleParts.map((part, index) => (
                 <span key={`${index}-${part}`}>{part} </span>
@@ -70,12 +97,18 @@ export default function AnimatedHeader({
           </div>
         </div>
       </div>
-      <div className={`relative px-10 ${textColor}`}>
+      <div
+        className={cn('relative px-10', headerVariants({ color }), className)}
+      >
         <div className="absolute inset-x-0 border-t-2" />
         <div className="py-12 text-end sm:py-16">
           <AnimatedTextLines
             text={brief}
-            className={`value-text-responsive font-light uppercase ${textColor}`}
+            className={cn(
+              'value-text-responsive font-light uppercase',
+              headerVariants({ color }),
+              className,
+            )}
           />
         </div>
       </div>

@@ -16,7 +16,6 @@ const HEADER: AnimatedHeaderProps = {
   brief: `I specialize in building realistic virtual scenes
     prefecting vritual user interaction experiences
     through different 3D package solutions`,
-  textColor: 'text-foreground',
 }
 
 function Hero() {
