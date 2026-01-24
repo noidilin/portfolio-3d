@@ -1,25 +1,30 @@
 import { Environment, Float, Lightformer } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { useMediaQuery } from 'react-responsive'
-import AnimatedHeader from '../components/animated-header'
+import AnimatedHeader, {
+  type AnimatedHeaderProps,
+} from '../components/animated-header'
 import Planet from '../components/planet'
 
-// NOTE: the line break is needed and will be used to animate with AnimatedTextLines
-const BRIEF = `I help growing brands and startups gain an
-unfair advantage through premium
-results driven webs/apps`
+// NOTE:
+// 1. the line break is needed and will be used to animate with <AnimatedTextLines/>
+// 2. the 3D object movement is animated in <Planet/>
+
+const HEADER: AnimatedHeaderProps = {
+  title: 'noidilin',
+  subTitle: '3D artist based in Taipei',
+  brief: `I specialize in building realistic virtual scenes
+    prefecting vritual user interaction experiences
+    through different 3D package solutions`,
+  textColor: 'text-foreground',
+}
 
 function Hero() {
   const isMobile = useMediaQuery({ maxWidth: 853 })
 
   return (
     <section id="home" className="flex min-h-screen flex-col justify-end">
-      <AnimatedHeader
-        subTitle={'404 No Bugs Found'}
-        title={'noidilin'}
-        brief={BRIEF}
-        textColor={'text-black'}
-      />
+      <AnimatedHeader {...HEADER} />
       <figure
         className="absolute inset-0 -z-50"
         style={{ width: '100vw', height: '100vh' }}
@@ -29,7 +34,7 @@ function Hero() {
           camera={{ position: [0, 0, -10], fov: 17.5, near: 1, far: 20 }}
         >
           <ambientLight intensity={0.5} />
-          {/* this is where the float animation comes from */}
+          {/* HACK: this is where the float animation comes from */}
           <Float speed={0.5}>
             <Planet scale={isMobile ? 0.7 : 1} />
           </Float>
