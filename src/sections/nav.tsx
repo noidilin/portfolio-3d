@@ -98,7 +98,7 @@ function Nav() {
     <>
       <nav
         ref={navRef}
-        className="fixed z-50 flex h-full w-full flex-col justify-between gap-y-10 bg-black px-10 py-28 text-white/80 uppercase md:left-1/2 md:w-1/2"
+        className="fixed z-50 flex h-full w-full flex-col justify-between gap-y-10 bg-card-foreground px-10 py-28 text-muted-foreground uppercase md:left-1/2 md:w-1/2"
       >
         <div className="flex flex-col gap-y-2 text-5xl md:text-6xl lg:text-8xl">
           {NAV_ITEMS.map((section, index) => (
@@ -109,7 +109,7 @@ function Nav() {
               }}
             >
               <Link
-                className="cursor-pointer transition-all duration-300 hover:text-white"
+                className="cursor-pointer transition-all duration-300 hover:text-accent"
                 to={`${section}`}
                 smooth
                 offset={0}
@@ -125,19 +125,19 @@ function Nav() {
           className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
         >
           <div className="font-light">
-            <p className="text-white/50 tracking-wider">E-mail</p>
+            <p className="text-muted tracking-wider">E-mail</p>
             <p className="text-pretty text-xl lowercase tracking-widest">
-              JohnDoe@gmail.com
+              linganinja.0120@gmail.com
             </p>
           </div>
           <div className="font-light">
-            <p className="text-white/50 tracking-wider">Social Media</p>
+            <p className="text-muted tracking-wider">Social Media</p>
             <div className="flex flex-col flex-wrap gap-x-2 md:flex-row">
               {SOCIALS.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  className="text-sm uppercase leading-loose tracking-widest transition-colors duration-300 hover:text-white"
+                  className="text-sm uppercase leading-loose tracking-widest transition-colors duration-300 hover:text-accent"
                 >
                   {'{ '}
                   {social.name}
@@ -150,7 +150,7 @@ function Nav() {
       </nav>
       <button
         type="button"
-        className="fixed top-4 right-10 z-50 flex h-14 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-full bg-black transition-all duration-300 md:h-20 md:w-20"
+        className="fixed top-4 right-10 z-50 flex h-10 w-10 cursor-pointer flex-col items-center justify-center gap-1 rounded-full bg-card-foreground transition-all duration-300 md:h-14 md:w-14"
         onClick={toggleMenu}
         style={
           showBurger
@@ -160,11 +160,11 @@ function Nav() {
       >
         <span
           ref={topLineRef}
-          className="block h-0.5 w-8 origin-center rounded-full bg-white"
+          className="block h-0.5 w-8 origin-center rounded-full bg-muted"
         ></span>
         <span
           ref={bottomLineRef}
-          className="block h-0.5 w-8 origin-center rounded-full bg-white"
+          className="block h-0.5 w-8 origin-center rounded-full bg-muted"
         ></span>
       </button>
     </>
