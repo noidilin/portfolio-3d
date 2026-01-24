@@ -5,6 +5,12 @@ import { useRef } from 'react'
 import { cn } from '@/lib/utils'
 import AnimatedTextLines from './animated-text-lines'
 
+// NOTE:
+// 1. slide up entrance animation with gsap timeline
+// 2. clip-path polygon mask for overflow hidden effect
+// 3. optional scrollTrigger for scroll-based activation
+// 4. uses class-variance-authority (cva) for color variants
+
 const headerVariants = cva('', {
   variants: {
     color: {
@@ -75,7 +81,7 @@ export default function AnimatedHeader({
         >
           <p
             className={cn(
-              'px-10 font-light text-sm uppercase tracking-[0.5rem]',
+              'px-10 font-light font-mono text-sm uppercase tracking-widest',
               headerVariants({ color }),
               className,
             )}

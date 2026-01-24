@@ -10,7 +10,12 @@ import { useRef } from 'react'
 import type * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
 
-// generated with `--types` flag on
+// NOTE:
+// 1. animate movement and rotation with gsap timeline on Three.js elements
+// 2. gltf model loaded with @react-three/drei useGLTF hook
+// 3. separate refs for container, spheres, and ring to animate independently
+
+// PERF: types can be generated with `--types` flag on
 type GLTFResult = GLTF & {
   nodes: {
     Sphere: THREE.Mesh
@@ -18,17 +23,20 @@ type GLTFResult = GLTF & {
     Sphere2: THREE.Mesh
   }
   materials: {
-    ['Material.002']: THREE.MeshStandardMaterial
-    ['Material.001']: THREE.MeshStandardMaterial
+    'Material.002': THREE.MeshStandardMaterial
+    'Material.001': THREE.MeshStandardMaterial
   }
 }
 
 // PERF: group element is mapped to THREE.Group JSX element props
+// - the generated type using JSX.IntrinsicElements['group'] to type props
+// - yet I think ThreeElements['group'] is more semantically correct
 export default function Planet(props: ThreeElements['group']) {
   const shapeContainer = useRef<THREE.Group>(null)
   const shperesContainer = useRef<THREE.Group>(null)
   const ringMesh = useRef<THREE.Mesh>(null)
 
+  // load the glb file for display
   const { nodes, materials } = useGLTF(
     '/models/planet.glb',
   ) as unknown as GLTFResult

@@ -5,6 +5,10 @@ import { useRef } from 'react'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// NOTE:
+// 1. splits text by newline character for line-by-line animation
+// 2. stagger reveal animation with gsap scrollTrigger
+
 interface AnimatedTextLinesProps {
   text: string
   className: string
@@ -42,7 +46,7 @@ export default function AnimatedTextLines({
           ref={(el) => {
             lineRefs.current[index] = el
           }}
-          className="block text-pretty leading-relaxed tracking-wide"
+          className="block text-pretty tracking-wide"
         >
           {part}
         </span>
