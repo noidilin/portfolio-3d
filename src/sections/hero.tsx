@@ -12,10 +12,9 @@ import Planet from '../components/planet'
 
 const HEADER: AnimatedHeaderProps = {
   title: 'noidilin',
-  subTitle: '3D artist based in Taipei',
-  brief: `I specialize in building realistic virtual scenes
-    prefecting vritual user interaction experiences
-    through different 3D package solutions`,
+  subTitle: '3D Artist & Motion Designer',
+  brief: `Crafting immersive visual narratives
+    through CG animation and cinematic storytelling`,
 }
 
 function Hero() {
