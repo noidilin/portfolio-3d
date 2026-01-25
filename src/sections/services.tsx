@@ -76,7 +76,7 @@ export default function Services() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-2 text-2xl text-white/80 sm:gap-4 lg:text-3xl">
+              <div className="flex flex-col gap-2 text-2xl text-primary-foreground/70 sm:gap-4 lg:text-3xl">
                 {service.items.map((item, itemIndex) => (
                   <div key={`${service.title}-${index}-${itemIndex}`}>
                     <h3 className="flex">

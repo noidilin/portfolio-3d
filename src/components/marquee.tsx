@@ -5,6 +5,7 @@ import { Observer } from 'gsap/all'
 import { useEffect, useRef } from 'react'
 
 import { createHorizontalLoop } from '@/lib/horizontal-loop'
+import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(Observer)
 
@@ -21,7 +22,7 @@ interface MarqueeProps {
 
 export default function Marquee({
   items,
-  className = 'text-white bg-black',
+  className = 'text-primary-foreground bg-primary',
   reverse = false,
 }: MarqueeProps) {
   const itemsRef = useRef<(HTMLSpanElement | null)[]>([])
@@ -58,7 +59,10 @@ export default function Marquee({
 
   return (
     <div
-      className={`marquee-text-responsive flex h-20 w-full items-center overflow-hidden whitespace-nowrap font-light uppercase md:h-25 ${className}`}
+      className={cn(
+        'marquee-text-responsive flex h-20 w-full items-center overflow-hidden whitespace-nowrap font-light uppercase md:h-25',
+        className,
+      )}
     >
       <div className="flex">
         {items.map((text, index) => (
