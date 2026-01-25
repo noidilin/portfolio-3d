@@ -5,7 +5,7 @@ const services = [
       'Captivating 3D animations that bring concepts to life. From product showcases to abstract visualizations, every frame is crafted with precision—combining technical expertise with artistic vision to deliver compelling visual narratives.',
     items: [
       {
-        title: '3D Product Presentation',
+        title: 'Product Presentation',
         description: '(Modeling, Texturing, Look Development)',
       },
       {
@@ -28,11 +28,11 @@ const services = [
         description: '(Residential, Commercial, Exhibition Spaces)',
       },
       {
-        title: 'Real-Time Engine Support',
+        title: 'Real-Time Engine',
         description: '(Unreal Engine 5, Dynamic Lighting, Virtual Tours)',
       },
       {
-        title: 'Exterior & Landscape',
+        title: 'Exterior Landscape',
         description: '(Google GIS Data, Environmental Context)',
       },
     ],
@@ -43,15 +43,15 @@ const services = [
       'End-to-end video production from concept to final delivery. Combining cinematography, color grading, and motion graphics to create polished content for promotional campaigns, documentaries, and branded storytelling.',
     items: [
       {
-        title: 'Cinematic Color Grading',
+        title: 'Color Grading',
         description: '(Film Emulation, Color Science, HDR Workflows)',
       },
       {
-        title: 'Documentary Production',
+        title: 'Documentary',
         description: '(Interview, B-Roll, Narrative Structure)',
       },
       {
-        title: 'Commercial Production',
+        title: 'Commercial',
         description: '(Promotional Videos, Brand Campaigns, Advertising)',
       },
     ],
@@ -66,7 +66,7 @@ const services = [
         description: '(Logotype, Color System, Typography)',
       },
       {
-        title: 'Animated Brand Assets',
+        title: 'Brand Assets',
         description: '(Logo Animation, Social Media Motion)',
       },
       {
