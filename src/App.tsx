@@ -6,6 +6,7 @@ import Hero from './sections/hero'
 import Nav from './sections/nav'
 import ServiceSummary from './sections/service-summary'
 import Services from './sections/services'
+import Works from './sections/works'
 
 function App() {
   const { progress } = useProgress()
@@ -41,6 +42,7 @@ function App() {
         <ServiceSummary />
         <Services />
         <About />
+        <Works />
       </div>
     </ReactLenis>
   )
