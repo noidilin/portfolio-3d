@@ -1,6 +1,7 @@
 import { useProgress } from '@react-three/drei'
 import ReactLenis from 'lenis/react'
 import { useEffect, useState } from 'react'
+import About from './sections/about'
 import Hero from './sections/hero'
 import Nav from './sections/nav'
 import ServiceSummary from './sections/service-summary'
@@ -39,6 +40,7 @@ function App() {
         <Hero />
         <ServiceSummary />
         <Services />
+        <About />
       </div>
     </ReactLenis>
   )
