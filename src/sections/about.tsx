@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/performance/noImgElement: small project should be fine */
+
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRef } from 'react'
@@ -65,7 +67,7 @@ const About = () => {
   return (
     <section id="about" className="min-h-screen rounded-b-4xl bg-primary">
       <AnimatedHeaderSection {...HEADER} />
-      <div className="flex flex-col items-center justify-between gap-16 px-10 pb-16 font-light text-white/60 text-xl tracking-wide md:text-2xl lg:flex-row lg:text-3xl">
+      <div className="flex flex-col items-center justify-between gap-16 px-10 pb-16 font-light text-primary-foreground/60 text-xl tracking-wide md:text-2xl lg:flex-row lg:text-3xl">
         <img
           ref={imgRef}
           src="images/man.jpg"
