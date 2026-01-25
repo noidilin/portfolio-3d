@@ -76,7 +76,7 @@ const About = () => {
         />
         <AnimatedTextLines
           brief={INTRODUCTION}
-          className={'w-full font-mono text-lg lg:text-2xl'}
+          className={'w-full font-mono text-lg leading-relaxed lg:text-2xl'}
         />
       </div>
     </section>

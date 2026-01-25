@@ -91,7 +91,7 @@ export default function AnimatedHeader({
           <div className="px-10">
             <h1
               className={cn(
-                'banner-text-responsive flex flex-col gap-12 uppercase sm:gap-16 md:block',
+                'banner-text-responsive flex flex-col gap-12 font-bold uppercase sm:gap-16 md:block',
                 headerVariants({ color }),
                 className,
               )}

@@ -42,9 +42,9 @@ const ContactSummary = () => {
       <div className="contact-text-responsive overflow-hidden text-center font-light">
         <p>
           " Let's create <br />
-          <span className="font-normal">memorable</span> &{' '}
+          <span className="font-bold">memorable</span> &{' '}
           <span className="italic">inspiring</span> <br />
-          visual experiences <span className="text-accent">together</span> "
+          visual experiences <span className="text-chart-1">together</span> "
         </p>
       </div>
       <Marquee
