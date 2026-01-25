@@ -10,17 +10,17 @@ gsap.registerPlugin(ScrollTrigger)
 // 2. stagger reveal animation with gsap scrollTrigger
 
 interface AnimatedTextLinesProps {
-  text: string
+  brief: string
   className: string
 }
 
 export default function AnimatedTextLines({
-  text,
+  brief,
   className,
 }: AnimatedTextLinesProps) {
   const containerRef = useRef(null)
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const lineParts = text.split('\n').filter((line) => line.trim() !== '')
+  const lineParts = brief.split('\n').filter((line) => line.trim() !== '')
 
   useGSAP(() => {
     // only animate if you have line break
@@ -46,7 +46,7 @@ export default function AnimatedTextLines({
           ref={(el) => {
             lineRefs.current[index] = el
           }}
-          className="block text-pretty tracking-wide"
+          className="block text-pretty tracking-tight"
         >
           {part}
         </span>

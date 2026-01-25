@@ -109,9 +109,9 @@ export default function AnimatedHeader({
         <div className="absolute inset-x-0 border-t-2" />
         <div className="py-12 text-end sm:py-16">
           <AnimatedTextLines
-            text={brief}
+            brief={brief}
             className={cn(
-              'value-text-responsive font-light uppercase',
+              'value-text-responsive font-mono font-thin lowercase',
               headerVariants({ color }),
               className,
             )}
