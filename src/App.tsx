@@ -12,7 +12,11 @@ import ServiceSummary from './sections/service-summary'
 import Services from './sections/services'
 import Works from './sections/works'
 
-function HomePage() {
+function HomePage({
+  onNavigateToOmniverse,
+}: {
+  onNavigateToOmniverse: () => void
+}) {
   const { progress } = useProgress()
   const [isReady, setIsReady] = useState(false)
 
@@ -46,8 +50,8 @@ function HomePage() {
         <ServiceSummary />
         <Services />
         <About />
+        <IndustrialSystems onNavigateToOmniverse={onNavigateToOmniverse} />
         <Works />
-        <IndustrialSystems />
         <ContactSummary />
         <Contact />
       </div>
@@ -56,10 +60,24 @@ function HomePage() {
 }
 
 function App() {
-  const normalizedPath = window.location.pathname.replace(/\/$/, '')
-  const isSkyvaultRoute = normalizedPath === '/skyvault'
+  const [path, setPath] = useState(window.location.pathname)
+  const normalizedPath = path.replace(/\/$/, '')
+  const isOmniverseRoute = normalizedPath === '/omniverse'
 
-  if (isSkyvaultRoute) {
+  useEffect(() => {
+    const handlePopState = () => setPath(window.location.pathname)
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
+
+  const navigateToOmniverse = () => {
+    window.history.pushState(null, '', '/omniverse')
+    setPath('/omniverse')
+    window.scrollTo({ top: 0 })
+  }
+
+  if (isOmniverseRoute) {
     return (
       <ReactLenis
         root
@@ -70,7 +88,7 @@ function App() {
     )
   }
 
-  return <HomePage />
+  return <HomePage onNavigateToOmniverse={navigateToOmniverse} />
 }
 
 export default App

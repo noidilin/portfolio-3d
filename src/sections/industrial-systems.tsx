@@ -1,5 +1,6 @@
 import { ArrowUpRight02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
+import type { MouseEvent } from 'react'
 
 const CAPABILITIES = [
   'BIM/IFC cleanup',
@@ -8,7 +9,28 @@ const CAPABILITIES = [
   'streamed RTX review',
 ]
 
-export default function IndustrialSystems() {
+type IndustrialSystemsProps = {
+  onNavigateToOmniverse: () => void
+}
+
+export default function IndustrialSystems({
+  onNavigateToOmniverse,
+}: IndustrialSystemsProps) {
+  const handleOmniverseClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return
+    }
+
+    event.preventDefault()
+    onNavigateToOmniverse()
+  }
+
   return (
     <section
       id="industrial-systems"
@@ -46,8 +68,9 @@ export default function IndustrialSystems() {
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:items-stretch">
         <a
-          href="/skyvault"
+          href="/omniverse"
           aria-label="Open industrial AI digital twins route"
+          onClick={handleOmniverseClick}
           className="group block min-w-0 overflow-hidden border border-border bg-card"
         >
           <video
@@ -69,7 +92,8 @@ export default function IndustrialSystems() {
             Omniverse workflows, and real-time spatial review.
           </p>
           <a
-            href="/skyvault"
+            href="/omniverse"
+            onClick={handleOmniverseClick}
             className="inline-flex w-fit items-center gap-3 bg-primary px-5 py-4 font-mono text-primary-foreground text-xs uppercase transition-colors duration-300 hover:bg-foreground"
           >
             view capability
