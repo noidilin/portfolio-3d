@@ -1,16 +1,18 @@
 import { useProgress } from '@react-three/drei'
 import ReactLenis from 'lenis/react'
 import { useEffect, useState } from 'react'
+import SkyvaultPage from './pages/skyvault'
 import About from './sections/about'
 import Contact from './sections/contact'
 import ContactSummary from './sections/contact-summary'
 import Hero from './sections/hero'
+import IndustrialSystems from './sections/industrial-systems'
 import Nav from './sections/nav'
 import ServiceSummary from './sections/service-summary'
 import Services from './sections/services'
 import Works from './sections/works'
 
-function App() {
+function HomePage() {
   const { progress } = useProgress()
   const [isReady, setIsReady] = useState(false)
 
@@ -21,7 +23,7 @@ function App() {
   return (
     <ReactLenis
       root
-      className="relative min-h-screen w-screen overflow-x-auto scroll-smooth"
+      className="relative min-h-screen w-screen overflow-x-hidden scroll-smooth"
     >
       {!isReady && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background font-light text-foreground transition-opacity duration-200">
@@ -45,11 +47,30 @@ function App() {
         <Services />
         <About />
         <Works />
+        <IndustrialSystems />
         <ContactSummary />
         <Contact />
       </div>
     </ReactLenis>
   )
+}
+
+function App() {
+  const normalizedPath = window.location.pathname.replace(/\/$/, '')
+  const isSkyvaultRoute = normalizedPath === '/skyvault'
+
+  if (isSkyvaultRoute) {
+    return (
+      <ReactLenis
+        root
+        className="relative min-h-screen w-screen overflow-x-hidden scroll-smooth"
+      >
+        <SkyvaultPage />
+      </ReactLenis>
+    )
+  }
+
+  return <HomePage />
 }
 
 export default App

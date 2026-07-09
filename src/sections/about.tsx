@@ -68,12 +68,12 @@ const About = () => {
     <section id="about" className="min-h-screen rounded-b-4xl bg-primary">
       <AnimatedHeaderSection {...HEADER} />
       <div className="flex flex-col items-center justify-between gap-16 px-10 pb-16 font-light text-primary-foreground/60 text-xl tracking-wide md:text-2xl lg:flex-row lg:text-3xl">
-        <div className="w-2xl">
+        <div className="w-full max-w-2xl">
           <img
             ref={imgRef}
             src="images/profile.webp"
             alt="profile photo"
-            className="aspect-3/4 rounded-3xl object-cover grayscale"
+            className="aspect-3/4 w-full rounded-3xl object-cover grayscale"
           />
         </div>
         <AnimatedTextLines
