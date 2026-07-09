@@ -51,7 +51,10 @@ function MediaFrame({
   className?: string
   controls?: boolean
 }) {
-  const imageClassName = media.src.includes('/floor-plan/')
+  const imageClassName =
+    media.src.includes('/floor-plan/') ||
+    media.src.includes('/ifc-sheet-export/') ||
+    media.src.includes('/neo-bike/')
     ? 'h-full w-full bg-background object-contain p-2'
     : 'h-full w-full object-cover'
 
@@ -96,26 +99,101 @@ function RepoLinks({ media }: { media: SkyvaultMedia[] }) {
   if (links.length === 0) return null
 
   return (
-    <div className="px-6 pb-20 md:px-10">
-      <div className="flex flex-wrap gap-x-8 gap-y-3 border-border border-t pt-5">
-        {links.map((link) => (
-          <a
-            key={link.src}
-            href={link.src}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 font-mono text-muted-foreground text-xs uppercase transition-colors duration-300 hover:text-foreground"
-          >
-            {link.label}
-            <HugeiconsIcon icon={ArrowUpRight02Icon} size={14} />
-          </a>
-        ))}
+    <div className="px-5 pb-20 sm:px-6 md:px-10">
+      <div className="skyvault-reveal grid gap-6 border-foreground border-t-2 pt-6 md:grid-cols-[0.82fr_1.18fr]">
+        <div>
+          <p className="font-mono text-muted-foreground text-xs uppercase">
+            repository evidence
+          </p>
+          <h3 className="mt-6 max-w-xl text-pretty font-bold text-3xl lowercase leading-none sm:text-4xl md:text-5xl">
+            source files and implementation archive.
+          </h3>
+        </div>
+        <div className="grid gap-3">
+          {links.map((link) => (
+            <a
+              key={link.src}
+              href={link.src}
+              target="_blank"
+              rel="noreferrer"
+              className="group grid gap-4 border border-border bg-card px-4 py-5 transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground sm:grid-cols-[1fr_auto] sm:items-start"
+            >
+              <span>
+                <span className="block font-mono text-muted-foreground text-xs uppercase transition-colors duration-300 group-hover:text-primary-foreground/70">
+                  {link.label}
+                </span>
+                {link.caption && (
+                  <span className="mt-3 block text-pretty font-mono text-muted-foreground text-sm lowercase leading-relaxed transition-colors duration-300 group-hover:text-primary-foreground/80">
+                    {link.caption}
+                  </span>
+                )}
+              </span>
+              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase">
+                open repo
+                <HugeiconsIcon icon={ArrowUpRight02Icon} size={16} />
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   )
 }
 
-function MediaCarousel({ media }: { media: SkyvaultMedia[] }) {
+function DocumentEvidence({ media }: { media: SkyvaultMedia }) {
+  return (
+    <div className="skyvault-reveal flex min-h-full flex-col justify-between gap-10 border-border border-t pt-4">
+      <div>
+        <p className="font-mono text-muted-foreground text-xs uppercase">
+          source artifact
+        </p>
+        <h3 className="mt-8 max-w-2xl text-pretty font-bold text-3xl lowercase leading-none sm:text-4xl md:text-5xl">
+          ifc-exported drawing package, preserved as the original pdf.
+        </h3>
+      </div>
+      <div className="border border-border bg-card">
+        <div className="grid gap-5 px-4 py-5 sm:grid-cols-[1fr_auto] sm:items-start">
+          <div>
+            <p className="font-mono text-muted-foreground text-xs uppercase">
+              {media.label}
+            </p>
+            {media.caption && (
+              <p className="mt-3 text-pretty font-mono text-muted-foreground text-sm lowercase leading-relaxed">
+                {media.caption}
+              </p>
+            )}
+          </div>
+          {media.duration && (
+            <p className="font-mono text-muted-foreground text-xs">
+              {media.duration}
+            </p>
+          )}
+        </div>
+        <a
+          href={media.src}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-between gap-4 border-border border-t px-4 py-4 font-mono text-xs uppercase transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
+        >
+          open pdf
+          <HugeiconsIcon icon={ArrowUpRight02Icon} size={16} />
+        </a>
+      </div>
+    </div>
+  )
+}
+
+function MediaCarousel({
+  media,
+  label = 'media set',
+  previousLabel = 'Previous media',
+  nextLabel = 'Next media',
+}: {
+  media: SkyvaultMedia[]
+  label?: string
+  previousLabel?: string
+  nextLabel?: string
+}) {
   const [activeIndex, setActiveIndex] = useState(0)
   const activeMedia = media[activeIndex]
 
@@ -137,13 +215,13 @@ function MediaCarousel({ media }: { media: SkyvaultMedia[] }) {
     <div className="skyvault-reveal min-w-0">
       <div className="flex items-center justify-between gap-4 border-border border-t py-4">
         <p className="font-mono text-muted-foreground text-xs uppercase">
-          floor plan set / {activeIndex + 1} of {media.length}
+          {label} / {activeIndex + 1} of {media.length}
         </p>
         <div className="flex gap-2">
           <button
             type="button"
-            title="Previous drawing"
-            aria-label="Previous drawing"
+            title={previousLabel}
+            aria-label={previousLabel}
             onClick={goToPrevious}
             className="flex size-10 items-center justify-center border border-border bg-background transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
           >
@@ -151,8 +229,8 @@ function MediaCarousel({ media }: { media: SkyvaultMedia[] }) {
           </button>
           <button
             type="button"
-            title="Next drawing"
-            aria-label="Next drawing"
+            title={nextLabel}
+            aria-label={nextLabel}
             onClick={goToNext}
             className="flex size-10 items-center justify-center border border-border bg-background transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
           >
@@ -264,12 +342,18 @@ function SkyvaultSectionBlock({
 }: {
   section: (typeof skyvaultSections)[number]
 }) {
+  if (section.id === 'modeling') {
+    return <ModelingSection section={section} />
+  }
+
   if (section.id === 'bim-ifc') {
     return <BimIfcSection section={section} />
   }
 
   const repoLinks = section.media.filter((media) => media.type === 'repo')
-  const displayMedia = section.media.filter((media) => media.type !== 'repo')
+  const displayMedia = section.media.filter(
+    (media) => media.type === 'image' || media.type === 'video',
+  )
   const featured = displayMedia.slice(0, 3)
   const supporting = displayMedia.slice(3)
 
@@ -307,6 +391,63 @@ function SkyvaultSectionBlock({
   )
 }
 
+function ModelingSection({
+  section,
+}: {
+  section: (typeof skyvaultSections)[number]
+}) {
+  const neoBikeImages = section.media.filter(
+    (media) => media.type === 'image' && media.src.includes('/neo-bike/'),
+  )
+  const neoBikePresentation = section.media.find(
+    (media) => media.type === 'video' && media.src.includes('/neo-bike/'),
+  )
+  const studyMedia = section.media.filter(
+    (media) =>
+      !media.src.includes('/neo-bike/') &&
+      (media.type === 'image' || media.type === 'video'),
+  )
+  const repoLinks = section.media.filter((media) => media.type === 'repo')
+
+  return (
+    <section id={section.id} className="skyvault-section">
+      <SectionHeader
+        eyebrow={section.eyebrow}
+        title={section.title}
+        description={section.description}
+        tags={section.tags}
+      />
+      {studyMedia.length > 0 && (
+        <div className="grid gap-6 px-5 pb-12 sm:px-6 md:grid-cols-2 md:px-10">
+          {studyMedia.map((media) => (
+            <MediaFrame
+              key={`${section.id}-${media.src}`}
+              media={media}
+              controls={media.type === 'video'}
+            />
+          ))}
+        </div>
+      )}
+      <div className="grid gap-8 px-5 pb-16 sm:px-6 md:px-10 lg:grid-cols-[0.82fr_1.18fr]">
+        <MediaCarousel
+          media={neoBikeImages}
+          label="neo-bike image set"
+          previousLabel="Previous Neo-bike image"
+          nextLabel="Next Neo-bike image"
+        />
+        {neoBikePresentation && (
+          <MediaFrame
+            media={neoBikePresentation}
+            controls
+            className="skyvault-reveal"
+          />
+        )}
+      </div>
+      <RepoLinks media={repoLinks} />
+    </section>
+  )
+}
+
 function BimIfcSection({
   section,
 }: {
@@ -315,11 +456,18 @@ function BimIfcSection({
   const floorPlanMedia = section.media.filter(
     (media) => media.type === 'image' && media.src.includes('/floor-plan/'),
   )
+  const sheetPackageMedia = section.media.filter(
+    (media) =>
+      media.type === 'image' && media.src.includes('/ifc-sheet-export/'),
+  )
   const renderMedia = section.media.filter(
     (media) => media.type === 'image' && media.src.includes('/render/'),
   )
   const walkthrough = section.media.find(
     (media) => media.type === 'video' && media.src.includes('walkthrough'),
+  )
+  const drawingPackage = section.media.find(
+    (media) => media.type === 'document' && media.src.endsWith('.pdf'),
   )
   const repoLinks = section.media.filter((media) => media.type === 'repo')
 
@@ -332,7 +480,12 @@ function BimIfcSection({
         tags={section.tags}
       />
       <div className="grid gap-8 px-5 pb-16 sm:px-6 md:px-10 lg:grid-cols-[0.82fr_1.18fr]">
-        <MediaCarousel media={floorPlanMedia} />
+        <MediaCarousel
+          media={floorPlanMedia}
+          label="floor plan set"
+          previousLabel="Previous drawing"
+          nextLabel="Next drawing"
+        />
         {walkthrough && (
           <MediaFrame
             media={walkthrough}
@@ -340,6 +493,15 @@ function BimIfcSection({
             className="skyvault-reveal"
           />
         )}
+      </div>
+      <div className="grid gap-8 px-5 pb-16 sm:px-6 md:px-10 lg:grid-cols-[0.82fr_1.18fr]">
+        <MediaCarousel
+          media={sheetPackageMedia}
+          label="ifc sheet package"
+          previousLabel="Previous IFC sheet"
+          nextLabel="Next IFC sheet"
+        />
+        {drawingPackage && <DocumentEvidence media={drawingPackage} />}
       </div>
       <div className="grid gap-6 px-5 pb-16 sm:grid-cols-2 sm:px-6 md:px-10 lg:grid-cols-3">
         {renderMedia.map((media) => (

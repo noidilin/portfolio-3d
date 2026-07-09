@@ -1,5 +1,5 @@
 export type SkyvaultMedia = {
-  type: 'image' | 'video' | 'repo'
+  type: 'image' | 'video' | 'repo' | 'document'
   src: string
   label: string
   alt?: string
@@ -166,6 +166,46 @@ export const skyvaultSections: SkyvaultSection[] = [
       },
       {
         type: 'image',
+        src: '/assets/skyvault/bim-ifc/ifc-sheet-export/12FA3-ifc-sheet-a01.png',
+        label: 'IFC sheet A01',
+        alt: 'A2 floor plan sheet exported from the 12FA3 IFC model.',
+        caption:
+          'A01 floor plan sheet exported from the IFC model with grids, section markers, title block, and drawing scale.',
+      },
+      {
+        type: 'image',
+        src: '/assets/skyvault/bim-ifc/ifc-sheet-export/12FA3-ifc-sheet-a02.png',
+        label: 'IFC sheet A02',
+        alt: 'A2 kitchen drawing sheet exported from the 12FA3 IFC model.',
+        caption:
+          'A02 kitchen section sheet showing scaled elevations and dimensioned construction logic.',
+      },
+      {
+        type: 'image',
+        src: '/assets/skyvault/bim-ifc/ifc-sheet-export/12FA3-ifc-sheet-a03.png',
+        label: 'IFC sheet A03',
+        alt: 'A2 wardrobe drawing sheet exported from the 12FA3 IFC model.',
+        caption:
+          'A03 wardrobe sheet with section drawings, plan reference, dimensions, and title block metadata.',
+      },
+      {
+        type: 'image',
+        src: '/assets/skyvault/bim-ifc/ifc-sheet-export/12FA3-ifc-sheet-a04.png',
+        label: 'IFC sheet A04',
+        alt: 'A2 washitsu drawing sheet exported from the 12FA3 IFC model.',
+        caption:
+          'A04 washitsu sheet documenting room geometry and modeled interior relationships.',
+      },
+      {
+        type: 'image',
+        src: '/assets/skyvault/bim-ifc/ifc-sheet-export/12FA3-ifc-sheet-a05.png',
+        label: 'IFC sheet A05',
+        alt: 'A2 TV and bed drawing sheet exported from the 12FA3 IFC model.',
+        caption:
+          'A05 TV and bed section sheet closing the drawing package from the same IFC source.',
+      },
+      {
+        type: 'image',
         src: '/assets/skyvault/bim-ifc/render/12FA3-v2-001.jpg',
         label: 'Interior render 001',
         alt: 'Rendered interior view from the 12FA3 project.',
@@ -190,6 +230,14 @@ export const skyvaultSections: SkyvaultSection[] = [
         caption:
           'The payoff: a reconstructed interior running as a navigable real-time scene.',
         duration: '01:26',
+      },
+      {
+        type: 'document',
+        src: '/assets/skyvault/bim-ifc/12FA3-floor-plan.pdf',
+        label: 'Open full IFC drawing package',
+        caption:
+          'Original 5-page A2 PDF exported from the 12FA3 IFC workflow.',
+        duration: '5 pages / A2 / PDF',
       },
       {
         type: 'repo',
